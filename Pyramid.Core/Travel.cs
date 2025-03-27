@@ -31,6 +31,14 @@ public class Travel
             throw new ArgumentException($"Departamento {departmentId} não encontrado na rota.");
         return index;
     }
+
+    public int GetBitmapLocationFromDepartmentRoute(String departmentName)
+    {
+        int index = DepartmentRoute.FindIndex(d => d.Name == departmentName);
+        if (index == -1)
+            throw new ArgumentException($"Departamento {departmentName} não encontrado na rota.");
+        return index;
+    }
     public bool IsFull()
     {
         return Seats.All(seat => !seat.IsSeatAvailable());

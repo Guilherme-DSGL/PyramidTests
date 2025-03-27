@@ -3,17 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pyramid.Core", "Pyramid.Core\Pyramid.Core.csproj", "{552E425D-383F-4E81-A3CC-30AFDB162A24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pyramid.Core", "Pyramid.Core\Pyramid.Core.csproj", "{552E425D-383F-4E81-A3CC-30AFDB162A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pyramid.Tests", "Pyramid.Tests\Pyramid.Tests.csproj", "{71D26789-ADF7-4DEF-9546-586980365B5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pyramid.Tests", "Pyramid.Tests\Pyramid.Tests.csproj", "{71D26789-ADF7-4DEF-9546-586980365B5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{552E425D-383F-4E81-A3CC-30AFDB162A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +21,11 @@ Global
 		{71D26789-ADF7-4DEF-9546-586980365B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71D26789-ADF7-4DEF-9546-586980365B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71D26789-ADF7-4DEF-9546-586980365B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A3FFB07-CB63-434C-949D-A6C48624D8ED}
 	EndGlobalSection
 EndGlobal
