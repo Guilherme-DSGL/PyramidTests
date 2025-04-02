@@ -106,9 +106,9 @@ public class TravelSeatTests
     {
         var travelSeat = new TravelSeat(1, departmentsMock, 1, 1);
 
-        travelSeat.UpdateBitmap(0, 1);
+        travelSeat.UpdateBitmap(1, 2);
 
-        Assert.False(travelSeat.IsSeatAvailableFor(0, 1));
-        Assert.True(travelSeat.IsSeatAvailableFor(1, 2));
+        Assert.False(travelSeat.IsSeatAvailableFor(1, 2));
+        Assert.True(travelSeat.IsSeatAvailableFor(0, 1));
     }
 }

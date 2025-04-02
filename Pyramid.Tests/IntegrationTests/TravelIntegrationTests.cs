@@ -111,4 +111,76 @@ public class TravelIntegrationTests
 
         Assert.Throws<InvalidOperationException>(() => travel.AddTicket(ticket2));
     }
+
+    [Fact]
+    public void GetAllAvailableSeats_ShoulAddExistingSeatIfExistsToAvaliableSeats()
+    {
+        var travel = new Travel(1, 10, TravelFixture.getDepartments(), DateTime.Now, null, null);
+        var startDepId = 1;
+        var endDepId = 2;
+        var existingSeat = new TravelSeat(1, TravelFixture.getDepartments(), 1, 1);
+        travel.AddSeat(existingSeat);
+
+        var avaliableSeats = travel.GetAllAvailableSeats(startDepId, endDepId);
+
+        Assert.Contains(existingSeat, avaliableSeats);
+    }
+
+    [Fact]
+    public void GetAllAvailableSeats_ShoulCreateNewSeatsIfDoesNotExists()
+    {
+        var travel = new Travel(1, 10, TravelFixture.getDepartments(), DateTime.Now, null, null);
+        var startDepId = 1;
+        var endDepId = 2;
+
+        var avaliableSeats = travel.GetAllAvailableSeats(startDepId, endDepId);
+
+        Assert.True(travel.Seats.Count() == 0);
+        Assert.True(avaliableSeats.Count() > 0);
+    }
+
+    [Fact]
+    public void ReserveSeat_ShouldAddTicketToTravel()
+    {
+
+        var travel = new Travel(1, 10, TravelFixture.getDepartments(), DateTime.Now, null, null);
+        var avaliableSeats = travel.GetAllAvailableSeats(1, 2);
+        var seat = avaliableSeats.First();
+        var ticket1 = new Ticket(1, seat.Id, 1, 1, 2);
+
+        travel.ReserveSeat(ticket1, seat);
+
+        Assert.Contains(ticket1, travel.Tickets);
+    }
+
+    [Fact]
+    public void GetAllAvailableSeats_ShoudNotShowSeatIfSeatIsNotAvaliable()
+    {
+        var travel = new Travel(1, 10, TravelFixture.getDepartments(), DateTime.Now, null, null);
+        var startDepId = 1;
+        var endDepId = 2;
+
+        var avaliableSeats1 = travel.GetAllAvailableSeats(startDepId, endDepId);
+        var seat1 = avaliableSeats1.First();
+        var ticket1 = new Ticket(1, seat1.Id, travel.Id, startDepId, endDepId);
+
+        int startLocation = travel.GetBitmapLocationFromDepartmentRoute(startDepId);
+        int endLocation = travel.GetBitmapLocationFromDepartmentRoute(endDepId);
+
+        Assert.DoesNotContain(seat1, travel.Seats);
+
+        travel.ReserveSeat(ticket1, seat1);
+
+        Assert.Contains(ticket1, travel.Tickets);
+        Assert.Contains(seat1, travel.Seats);
+        Assert.False(seat1.IsSeatAvailableFor(startLocation, endLocation));
+
+
+        var avaliableSeats2 = travel.GetAllAvailableSeats(startDepId, endDepId);
+        var seat2 = avaliableSeats2.First();
+
+        Assert.True(seat2.ArmchairNumber != seat1.ArmchairNumber);
+
+
+    }
 }

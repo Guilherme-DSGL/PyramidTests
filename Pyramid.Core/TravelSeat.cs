@@ -26,7 +26,7 @@ namespace Pyramid.Core
 
         public bool IsSeatAvailableFor(int startLocation, int endLocation)
         {
-            if (startLocation < 0 || endLocation > Bitmap.Length - 1 || startLocation >= endLocation)
+            if (startLocation < 0 || endLocation > Bitmap.Length - 1 || startLocation >= endLocation || endLocation <= startLocation)
                 throw new ArgumentException("Intervalo inválido para verificar disponibilidade." + endLocation + startLocation);
 
             return !Bitmap.Cast<bool>().Skip(startLocation).Take(endLocation - startLocation).Contains(true);

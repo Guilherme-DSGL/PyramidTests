@@ -24,6 +24,41 @@ public class Travel
         TravelDate = travelDate;
     }
 
+    public int ReservedSeats()
+    {
+        return Seats.Count(seat => !seat.IsSeatAvailable());
+    }
+
+
+    public List<TravelSeat> GetAllAvailableSeats(int startDeptId, int endDeptId)
+    {
+        var availableSeats = new List<TravelSeat>();
+        int startLocation = GetBitmapLocationFromDepartmentRoute(startDeptId);
+        int endLocation = GetBitmapLocationFromDepartmentRoute(endDeptId);
+
+        for (int seatNumber = 1; seatNumber <= MaxSeatsCount; seatNumber++)
+        {
+            var existingSeat = _seats.FirstOrDefault(s => s.ArmchairNumber == seatNumber);
+
+            if (existingSeat == null)
+            {
+                availableSeats.Add(new TravelSeat(
+            id: _seats.Count + availableSeats.Count(s => !_seats.Contains(s)) + 1,
+            DepartmentRoute,
+            Id,
+            seatNumber));
+            } else
+            {
+                if (existingSeat.IsSeatAvailableFor(startLocation, endLocation))
+                {
+                    availableSeats.Add(existingSeat);
+                }
+            }
+           
+        }
+        return availableSeats.OrderBy(s => s.ArmchairNumber).ToList();
+    }
+
     public int GetBitmapLocationFromDepartmentRoute(int departmentId)
     {
         int index = DepartmentRoute.FindIndex(d => d.Id == departmentId);
@@ -43,6 +78,16 @@ public class Travel
     {
         return Seats.All(seat => !seat.IsSeatAvailable());
     }
+
+    public void ReserveSeat(Ticket ticket, TravelSeat seat)
+    {
+        if (!_seats.Contains(seat) && _seats.Count < MaxSeatsCount)
+        {
+            AddSeat(seat);
+        }
+            AddTicket(ticket);
+    }
+
     public void AddSeat(TravelSeat seat)
     {
         if (Seats.Count == MaxSeatsCount)
