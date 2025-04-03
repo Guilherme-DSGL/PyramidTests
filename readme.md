@@ -81,16 +81,17 @@ Representa um assento dentro de uma viagem, composto pelo bitmap que é usado pa
    cd PyramidTests
    ```
 
-   Para executar com a cobertura do coverlet, basta executar o comando abaixo
+   Para executar com a cobertura do coverlet, basta executar os comandos abaixo
 
    ```bash
-   dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=json /p:CoverletOutput=./coverage/ 
+   cd Pyramid.Tests
+   dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage/ 
    ```
 
    E em seguida para gerar uma vizualiação html dos dados gerados basta executar o comando abaixo
 
    ```bash
-   reportgenerator -reports:"coverage/coverage.json" -targetdir:"TestResults/CoverageReport" -reporttypes:Html
+   reportgenerator -reports:"coverage/coverage.opencover.xml" -targetdir:"TestResults/CoverageReport" -reporttypes:Html
    ```
 
    Na pasta gerada ```CoverageReport``` basta abrir o arquivo ```index.html``` com o navegador de sua escolha.
