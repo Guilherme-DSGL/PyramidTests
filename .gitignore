@@ -47,9 +47,6 @@ launchSettings.json
 *.vssscc
 .env
 
-TestResults/
-coverage/
-*.coverage
 *.testsettings
 *.vsix
 .vscode/
