@@ -59,7 +59,8 @@ Representa um assento dentro de uma viagem, composto pelo bitmap que é usado pa
 
 1. Clone o repositório:
    ```bash
-   
+   git clone https://github.com/Guilherme-DSGL/PyramidTests.git
+   cd PyramidTests
    ```
 2. Instale as dependências:
    ```bash
@@ -77,8 +78,6 @@ Representa um assento dentro de uma viagem, composto pelo bitmap que é usado pa
 
    ```bash 
    dotnet test 
-   git clone https://github.com/Guilherme-DSGL/PyramidTests.git
-   cd PyramidTests
    ```
 
    Para executar com a cobertura do coverlet, basta executar os comandos abaixo
